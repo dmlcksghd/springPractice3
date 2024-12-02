@@ -7,50 +7,59 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	 <context:component-scan 
-	 base-package="com.shinhan.myapp2,net.firstzone"/>  
+	<context:component-scan
+		base-package="com.shinhan.myapp2,net.firstzone" />
 	<!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
 		<property name="location" value="/WEB-INF/spring/appServlet/oracleDB.properties" 
 		/> <property name="fileEncoding" value="UTF-8" /> </bean> -->
 
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-          <list>
-            <value>/WEB-INF/spring/appServlet/oracleDB.properties</value>
-            <value>classpath:/application.properties</value>
-          </list>
-        </property>		
+		<property name="locations">
+			<list>
+				<value>/WEB-INF/spring/appServlet/oracleDB.properties</value>
+				<value>classpath:/application.properties</value>
+			</list>
+		</property>
 
 		<property name="fileEncoding" value="UTF-8" />
 	</bean>
-	
+
+	<!-- sqlSession을 생성해준다. -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation"
+			value="classpath:mybatis/sqlMapConfig.xml" />
+		<property name="mapperLocations"
+			value="classpath:mybatis/mappers/*Mapper.xml" />
+	</bean>
+
+	<!-- SQL문 실행하여 DB객체와 자바객체를 Mapping해준다. -->
+	<bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+
 	<!-- JNDI로 Connection Pooling사용하기 -->
-	<!-- <jee:jndi-lookup 
-	id="dataSource"
-	resource-ref="true"
-	jndi-name="jdbc/myoracle"></jee:jndi-lookup> -->
-	
-	
-	<!-- Connection Pooling이용하기  -->
-	 
+	<!-- <jee:jndi-lookup id="dataSource" resource-ref="true" jndi-name="jdbc/myoracle"></jee:jndi-lookup> -->
+
+
+	<!-- Connection Pooling이용하기 -->
+
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp2.BasicDataSource">
-		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="driverClassName"
+			value="${jdbc.driverClassName}" />
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 	</bean>
-	
-	
-	
-    <!-- DriverManager이용하기
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="${jdbc.driverClassName}" />
-		<property name="url" value="${jdbc.url}" />
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
-	</bean>
-    -->
+
+
+
+	<!-- DriverManager이용하기 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+		<property name="driverClassName" value="${jdbc.driverClassName}" /> <property 
+		name="url" value="${jdbc.url}" /> <property name="username" value="${jdbc.username}" 
+		/> <property name="password" value="${jdbc.password}" /> </bean> -->
 </beans>

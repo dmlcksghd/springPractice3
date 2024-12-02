@@ -14,13 +14,15 @@ import org.springframework.stereotype.Repository;
 
 import com.shinhan.myapp.vo.DeptDTO;
 
+import lombok.extern.slf4j.Slf4j;
 import net.firstzone.util.DBUtil;
 
 /*
  * <bean id="deptDAO2" class="DeptDAO"/>
  */
+@Slf4j
 @Repository("deptDAO2") 
-public class DeptDAO {
+public class DeptDAOJDBC implements DeptDAOInterface {
  
 	//type이 같으면 자동으로 Injection된다. (IOC, DI)
 	@Autowired
@@ -60,7 +62,7 @@ public class DeptDAO {
 		} finally {
 			DBUtil.dbDisconnect(conn, st, rs);
 		}
-
+		log.info("JDBC사용: " + deptlist.size() + "건");
 		return deptlist;
 	}
 

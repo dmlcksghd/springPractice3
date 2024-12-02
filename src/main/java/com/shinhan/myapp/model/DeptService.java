@@ -3,6 +3,7 @@ package com.shinhan.myapp.model;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.shinhan.myapp.vo.DeptDTO;
@@ -10,8 +11,12 @@ import com.shinhan.myapp.vo.DeptDTO;
 @Service 
 public class DeptService {
     
-	@Autowired   
-	DeptDAO deptDao ;
+	//@Autowired: type이 같으면 자동으로 Injection해준다.
+	//같은 타입이 여러개 있으면 오류
+	//@Qualifier: 이름으로 Injection한다.
+	@Autowired
+	@Qualifier("deptMybatis")
+	DeptDAOInterface deptDao ;
 
 	// 1.紐⑤몢議고쉶
 	public List<DeptDTO> selectAllService() {
