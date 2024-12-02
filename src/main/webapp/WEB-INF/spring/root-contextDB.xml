@@ -17,7 +17,7 @@
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>/WEB-INF/spring/appServlet/oracleDB.properties</value>
+				<value>/WEB-INF/spring/oracleDB.properties</value>
 				<value>classpath:/application.properties</value>
 			</list>
 		</property>
