@@ -6,6 +6,10 @@
 <configuration>
 	<settings>
 		<setting name="logImpl" value="LOG4J" />
+		<!-- 
+		Mapper에서 null값이 왔을 때 칼럼의 해당 타입임을 설정한다.
+		이 설정이 없으면 #{email, jdbcType=VARCHAR}), #{salary, jdbcType=INTEGER}) 이렇게 직접 다 줘야한다.
+		 -->
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 	<typeAliases>

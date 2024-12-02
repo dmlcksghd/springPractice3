@@ -2,41 +2,57 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <!-- namespace : 이름공간(group), 다른 mapper에있는 id와 현재 mapper의 id가 중복시 구분하기 위함 -->
 <mapper namespace="com.shinhan.dept">
-  <select id="selectAll" resultType="deptVO">
-	select * 
-	from departments 
-	order by 1
-  </select>
-  
-  <select id="selectById" parameterType="int" resultType="deptVO">
-  	select * 
-  	from departments 
-  	where department_id = #{department_id}
-  </select>
-  
-  <insert id="insert" parameterType="deptVO">
-	insert into departments(department_id, department_name, manager_id, location_id) 
-	values(
-	#{department_id},
-	#{department_name},
-	#{manager_id},
-	#{location_id})   
-  </insert>
-  
-  <update id="update" parameterType="deptVO">
-  	update departments
-  	set department_name = #{department_id},
-  		manager_id = #{manager_id},
-  		location_id = #{location_id}
-  	where department_id = #{department_id}
-  </update>
-  
-  <delete id="delete">
-  	delete 
-  	from departments 
-  	where department_id = #{department_id}
-  </delete>
+	<!-- DB의 칼럼이름과 JAVA의 field이름이 다르다면 mapping하는 map을 정의한다. -->
+	<resultMap type="com.shinhan.myapp.vo.DeptDTO2" id="deptVO2">
+		<result property="dept_id" column="department_id"/>
+		<result property="dept_name" column="department_name"/>
+		<result property="manager_id" column="manager_id"/>
+		<result property="location_id" column="location_id"/>
+	</resultMap>
+
+	<select id="selectAll" resultType="deptVO">
+		select *
+		from departments
+		order by 1
+	</select>
+
+	<select id="selectAll2"
+		resultType="com.shinhan.myapp.vo.DeptDTO2">
+		select *
+		from departments
+		order by 1
+	</select>
+
+	<select id="selectById" parameterType="int" resultType="deptVO">
+		select *
+		from departments
+		where department_id = #{department_id}
+	</select>
+
+	<insert id="insert" parameterType="deptVO">
+		insert into departments(department_id, department_name, manager_id,
+		location_id)
+		values(
+		#{department_id},
+		#{department_name},
+		#{manager_id},
+		#{location_id})
+	</insert>
+
+	<update id="update" parameterType="deptVO">
+		update departments
+		set department_name = #{department_id},
+		manager_id = #{manager_id},
+		location_id = #{location_id}
+		where department_id = #{department_id}
+	</update>
+
+	<delete id="delete">
+		delete
+		from departments
+		where department_id = #{department_id}
+	</delete>
 </mapper>

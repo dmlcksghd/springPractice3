@@ -32,7 +32,7 @@
 		where  job_id = #{jobid}
 	</select>
 
-	<select id="selectByDept" parameterType="int">
+	<select id="selectByDept" parameterType="int" resultType="empVO">
 		select * from employees where department_id = #{deptid}
 	</select>
 
@@ -55,6 +55,24 @@
 		map.put("salary", 값);	=> mybatis가 map.get(salary)
 		map.put("hdate", 값);	=> mybatis가 map.get(hdate)
 	-->
+	
+	<!-- deptid가 -1이면 모든 부서, jobid가 -1이면 모든 job -->
+	<!-- 동적 sql문 만들기 -->
+	<select id="selectByCondition2" resultType="empVO" parameterType="map">
+		select * 
+		from employees where salary >= #{salary}
+		
+			<if test="deptid != -1">
+				and department_id = #{deptid}
+			</if>
+			<if test="jobid != '-1'">
+				and jobid = #{jobid}
+			</if>
+			<if test="hdate != '1900-01-01'">
+				and hire_date >= #{hdate}
+			</if>
+	</select>
+	
 	<select id="selectByCondition" resultType="empVO" parameterType="map">
 		select * 
 		from employees 
@@ -85,6 +103,7 @@
 		#{manager_id}, 
 		#{department_id})
 	</insert>
+	
 	<!-- empVO에 전달된 정보를 setter로 읽음 #{first_name} => getFirst_name() -->
 	<update id="update" parameterType="empVO">
 		update employees set

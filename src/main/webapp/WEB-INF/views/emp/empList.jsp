@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" session="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="${pageContext.servletContext.contextPath}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +13,12 @@
 <body>
 	<div class="container">
 		<%@ include file="../common/header.jsp"%>
+		<hr>
+		<button id="btnSalary" class="btn btn-danger">조회(only급여)</button>
+		<button id="btnJob" class="btn btn-danger">조회(only직책)</button>
+		<button id="btnDept" class="btn btn-danger">조회(only부서)</button>
+		<button id="btnJobJoin" class="btn btn-danger">조회(only직책join)</button>
+		<button id="btnJobJoin2" class="btn btn-danger">조회(only직책join-map)</button>
 		<hr>		 
 			<div class="input-group mt-5 mb-5">
 				<span class="input-group-text">부서</span> 
@@ -70,7 +78,71 @@
    $('[name="hire_date"]').val(d.toISOString().split("T")[0] );
    $("#btn_condition").on("click", f_ajax);
    $("#btn_condition").trigger("click"); //이벤트 호출 
+   $("#btnSalary").on("click", f_salary);
+   $("#btnJob").on("click", f_job);
+   $("#btnDept").on("click", f_dept);
+   $("#btnJobJoin").on("click", f_jobjoin);
+   $("#btnJobJoin2").on("click", f_jobjoin2);
 });  
+function f_salary() {
+	alert("f_salary");
+	$.ajax({
+		url:"${path}/emp/listBySalary.do",
+		data:{salary: $("input[name='salary']").val()},
+		success:function(responseData) {
+			$("#table_here").html(responseData);
+		},
+		error:function() {}
+	});
+}
+function f_job() {
+	alert("f_job");
+	$.ajax({
+		url:"${path}/emp/listByJob.do",
+		data:{job: $("select[name='job_id']").val()},
+		success:function(responseData) {
+			$("#table_here").html(responseData);
+		},
+		error:function() {}
+	});
+}
+function f_dept() {
+	alert("f_dept");
+	$.ajax({
+		url:"${path}/emp/listByDept.do",
+		data:{dept_id: $("select[name='department_id']").val()},
+		success:function(responseData) {
+			$("#table_here").html(responseData);
+		},
+		error:function() {}
+	});
+}
+
+function f_jobjoin() {
+	alert("f_jobjoin");
+	$.ajax({
+		url:"${path}/emp/listByJobJoin.do",
+		data:{job: $("select[name='job_id']").val()},
+		success:function(responseData) {
+			$("#table_here").html(responseData);
+		},
+		error:function() {}
+	});
+}
+
+function f_jobjoin2() {
+	alert("f_jobjoin2");
+	$.ajax({
+		url:"${path}/emp/listByJobJoin2.do",
+		data:{job: $("select[name='job_id']").val()},
+		success:function(responseData) {
+			$("#table_here").html(responseData);
+		},
+		error:function() {}
+	});
+}
+
+
 function f_ajax(){
   $.ajax({
     url:"${path}/emp/list2.do",

@@ -20,12 +20,14 @@ import org.springframework.stereotype.Repository;
 
 import com.shinhan.myapp.vo.DeptDTO;
 
+import lombok.extern.slf4j.Slf4j;
 import net.firstzone.util.DBUtil;
 import net.firstzone.util.DateUtil;
 
 
-@Repository
-public class EmpDAO implements EmpDAOInterface {
+@Slf4j
+@Repository("empDAO")
+public class EmpDAOJDBC implements EmpDAOInterface {
 
 	@Autowired
 	DataSource ds;

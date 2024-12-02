@@ -10,15 +10,25 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmpService {
 
+	//@Autowired: type이 같으면 injection, 같은 타입이 여러개 있으면 이름이 같은애 injection
+	//@Qualifier: 이름으로 injection
 	@Autowired
 	@Qualifier("empMybatis")
 	EmpDAOInterface empDAO;
 
+	public Map<String, Object> selectByJobJoin2(String job_id) {
+		return empDAO.selectJoin2(job_id);
+	}
+	
+	//직원(employees), 부서(departments), 지역(locations), 나라(countries)
+	public List<EmpJoinDTO> selectByJobJoin(String job_id) {
+		return empDAO.selectJoin(job_id);
+	}
+	
 	public List<JobDTO> selectAllJobService() {
 		return empDAO.selectAllJob();
 	}
 
-	//
 	public List<EmpDTO> selectByDept(int dept_id) {
 		return empDAO.selectByDept(dept_id);
 	}

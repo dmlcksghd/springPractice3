@@ -80,6 +80,8 @@ public class EmpDAOMybatis implements EmpDAOInterface {
 	}
 
 	public int insert(EmpDTO emp) {
+//		emp.setFirst_name(null);
+//		emp.setPhone_number(null);
 		int result = sqlSession.insert(namespace + "insert", emp);
 		log.info("mybatis이용: " + result + "건 입력");
 		return result;
