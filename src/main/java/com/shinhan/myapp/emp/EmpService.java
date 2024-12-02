@@ -16,13 +16,17 @@ public class EmpService {
 	@Qualifier("empMybatis")
 	EmpDAOInterface empDAO;
 
+	//직원(employees), 부서(departments), 지역(locations), 나라(countries)
+	public List<EmpJoinDTO> selectByJobJoin(String job_id) {
+		return empDAO.selectJoin(job_id);
+	}
+	
 	public Map<String, Object> selectByJobJoin2(String job_id) {
 		return empDAO.selectJoin2(job_id);
 	}
 	
-	//직원(employees), 부서(departments), 지역(locations), 나라(countries)
-	public List<EmpJoinDTO> selectByJobJoin(String job_id) {
-		return empDAO.selectJoin(job_id);
+	public List<Map<String, Object>> selectByJobJoin3(String job_id) {
+		return empDAO.selectJoin3(job_id);
 	}
 	
 	public List<JobDTO> selectAllJobService() {

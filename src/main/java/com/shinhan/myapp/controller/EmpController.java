@@ -41,16 +41,16 @@ public class EmpController {
 	final EmpService empService;
 	final DeptService deptService;
 
-	@GetMapping("/listByJobJoin2.do")
-	public String listByJobJoin2(String job, Model model) {
-		model.addAttribute("empDatas", empService.selectByJobJoin2(job));
-		return "emp/empListTable2";
-	}
-	
 	@GetMapping("/listByJobJoin.do")
 	public String listByJobJoin(String job, Model model) {
 		model.addAttribute("empDatas", empService.selectByJobJoin(job));
 		return "emp/empListTable2";
+	}
+	
+	@GetMapping("/listByJobJoin2.do")
+	public String listByJobJoin2(String job, Model model) {
+		model.addAttribute("empDatas", empService.selectByJobJoin3(job));
+		return "emp/empListTable3";
 	}
 	
 	@GetMapping("/listByDept.do")

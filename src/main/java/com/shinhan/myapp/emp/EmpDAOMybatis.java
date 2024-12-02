@@ -25,10 +25,14 @@ public class EmpDAOMybatis implements EmpDAOInterface {
 	//return값 = sqlSession.selectList("")
 	//return값 = sqlSession.selectMap("")
 	
-	public Map<String, Object> selectJoin2(String jobid) {
-		Map<String, Object> emplist = sqlSession.selectMap(namespace + "selectAllJob", jobid);
+	public List<Map<String, Object>> selectJoin3(String jobid) {
+		List<Map<String, Object>> emplist = sqlSession.selectList(namespace + "selectJoin2", jobid);
 		log.info("mybatis이용(Map): " + emplist.size() + "건");
 		return emplist;
+	}
+	
+	public Map<String, Object> selectJoin2(String jobid) {
+		return null;
 	}
 	 
 	public List<JobDTO> selectAllJob() {
@@ -62,7 +66,7 @@ public class EmpDAOMybatis implements EmpDAOInterface {
 	}
 
 	public List<EmpDTO> selectByCondition(Map<String, Object> map) {
-		List<EmpDTO> emplist = sqlSession.selectList(namespace + "selectByCondition", map);
+		List<EmpDTO> emplist = sqlSession.selectList(namespace + "selectByCondition2", map);
 		log.info("mybatis이용: " + emplist.size() + "건");
 		return emplist;
 	}

@@ -5,6 +5,10 @@ import java.util.Map;
 
 //Interface(규격서) : 정의는 있고 구현은 없음
 public interface EmpDAOInterface {
+	/* public List<Map<String, Object>> selectJoin3(String jobid); */
+	
+	public List<Map<String, Object>> selectJoin3(String jobid);
+	
 	public Map<String, Object> selectJoin2(String jobid);
 	 
 	public List<JobDTO> selectAllJob();

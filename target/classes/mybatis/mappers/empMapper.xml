@@ -60,13 +60,14 @@
 	<!-- 동적 sql문 만들기 -->
 	<select id="selectByCondition2" resultType="empVO" parameterType="map">
 		select * 
-		from employees where salary >= #{salary}
+		from employees 
+		where salary >= #{salary}
 		
 			<if test="deptid != -1">
 				and department_id = #{deptid}
 			</if>
 			<if test="jobid != '-1'">
-				and jobid = #{jobid}
+				and job_id = #{jobid}
 			</if>
 			<if test="hdate != '1900-01-01'">
 				and hire_date >= #{hdate}
