@@ -418,6 +418,7 @@ public class EmpDAO {
 		return emp;
 	}
 
+	//기존 JDBC프로그램의 단점 : SQL문이 자바와 섞여있음, DB의 table(Object) 칼럼과 자바의 VO의 field를 직접 Mapping
 	private static EmpDTO makeEmp(ResultSet rs) throws SQLException {
 		EmpDTO emp = new EmpDTO();
 		emp.setCommission_pct(rs.getDouble("Commission_pct"));
