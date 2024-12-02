@@ -25,7 +25,7 @@ import net.firstzone.util.DateUtil;
 
 
 @Repository
-public class EmpDAO {
+public class EmpDAO implements EmpDAOInterface {
 
 	@Autowired
 	DataSource ds;

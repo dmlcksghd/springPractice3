@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shinhan.emp">
+
+	<select id="selectAll" resultType="empVO">
+		select * 
+		from employees 
+		order by 1
+	</select>
+
+	<select id="selectJoin2" resultType="map" parameterType="string">
+		select employee_id, first_name, salary, department_name, city, country_name
+		from employees join departments using(department_id)
+			join locations using(location_id)
+			join countries USING (country_id)
+		where  job_id =  #{aa}
+	</select>
+
+	<select id="selectAllJob" resultType="jobVO">
+		select * 
+		from jobs 
+	</select>
+	
+	<select id="selectJoin" parameterType="string" resultType="com.shinhan.myapp.emp.EmpJoinDTO">
+		select employee_id, first_name, salary, department_name, city, country_name
+		from employees join departments using(department_id)
+			join locations using(location_id)
+			join countries USING (country_id)
+		where  job_id = #{jobid}
+	</select>
+
+	<select id="selectByDept" parameterType="int">
+		select * from employees where department_id = #{deptid}
+	</select>
+
+	<select id="selectByJob" parameterType="string" resultType="empVO">
+		select * 
+		from employees 
+		where job_id = #{jobid}
+	</select>
+
+	<select id="selectBySalary" parameterType="double" resultType="empVO">
+		select * 
+		from employees 
+		where salary >= #{sal}
+	</select>
+	
+	<!-- 
+		map을 파라메터로 가져오기
+		map.put("deptid", 값);	=> mybatis가 map.get(deptid)
+		map.put("jobid", 값);	=> mybatis가 map.get(jobid)
+		map.put("salary", 값);	=> mybatis가 map.get(salary)
+		map.put("hdate", 값);	=> mybatis가 map.get(hdate)
+	-->
+	<select id="selectByCondition" resultType="empVO" parameterType="map">
+		select * 
+		from employees 
+		where (-1 = #{deptid} or department_id = #{deptid}) 
+		and ('-1' = #{jobid} or job_id = #{jobid} ) 
+		and salary >= #{salary} and  hire_date >= #{hdate}
+	</select>
+
+	<!-- employees테이블에서 select한 칼럼의 정보를 empVO를 기본 생성자로 생성하고 setter로 넣는다. -->
+	<select id="selectById" parameterType="int" resultType="empVO">
+		select  *  
+		from employees 
+		where employee_id = #{empid}
+	</select>
+
+	<insert id="insert" parameterType="empVO">
+		insert into employees(employee_id, first_name, last_name, EMAIL, phone_number, hire_date, job_id, salary, commission_pct, manager_id, department_id)
+		values(
+		#{employee_id},
+		#{first_name}, 
+		#{last_name}, 
+		#{email}, 
+		#{phone_number}, 
+		#{hire_date}, 
+		#{job_id}, 
+		#{salary}, 
+		#{commission_pct}, 
+		#{manager_id}, 
+		#{department_id})
+	</insert>
+	<!-- empVO에 전달된 정보를 setter로 읽음 #{first_name} => getFirst_name() -->
+	<update id="update" parameterType="empVO">
+		update employees set
+		first_name=#{first_name},
+		last_name=#{last_name},
+		EMAIL=#{email},
+		phone_number=#{phone_number},
+		hire_date=#{hire_date},
+		job_id=#{job_id},
+		salary=#{salary},
+		commission_pct=#{commission_pct},
+		manager_id=#{manager_id},
+		department_id=#{department_id}
+		where employee_id=#{employee_id}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete
+		from employees
+		where EMPLOYEE_ID = #{empid}
+	</delete>
+</mapper>

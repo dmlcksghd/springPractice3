@@ -9,7 +9,7 @@ import org.springframework.util.StopWatch;
 
 
 @Component
-@Aspect //@PointCut + Advice
+//@Aspect //@PointCut + Advice
 public class StopWatchAdvice   {
  
 	//@Pointcut("execution(* select*(..))")
