@@ -13,7 +13,8 @@
 		<property name="location" value="/WEB-INF/spring/appServlet/oracleDB.properties" 
 		/> <property name="fileEncoding" value="UTF-8" /> </bean> -->
 
-	<!-- properties설정파일의 위치를 지정하기 (JDBCDriver 과 Connection Pooling방법 DataSource에서 이용) -->
+	<!-- properties설정파일의 위치를 지정하기 (JDBCDriver 과 Connection Pooling방법 DataSource에서 
+		이용) -->
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
@@ -46,9 +47,20 @@
 	<!-- <jee:jndi-lookup id="dataSource" resource-ref="true" jndi-name="jdbc/myoracle"></jee:jndi-lookup> -->
 
 
-	<!-- Connection Pooling이용하기 -->
-
 	<bean id="dataSource"
+		class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<constructor-arg ref="dataSourceOriginal" />
+		<property name="logFormatter">
+			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+				<property name="loggingType" value="MULTI_LINE"></property>
+				<property name="sqlPrefix" value="[SQL문장] "></property>
+			</bean>
+		</property>
+	</bean>
+
+	<!-- 사용자가 Browser로 요청보냄 => Filter => FrontController => Controller => Service => DAOMybatis => sqlSession => sqlSessionFactory => dataSource(dataSourceOriginal+log남기는방법) => dataSourceOriginal => DB -->
+	<!-- Connection Pooling이용하기 -->
+	<bean id="dataSourceOriginal"
 		class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName"
 			value="${jdbc.driverClassName}" />
