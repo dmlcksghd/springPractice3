@@ -12,14 +12,29 @@
 		</layout>
 	</appender>
 
+	<!-- DailyFile Appenders -->
+	<appender name="dailyFileAppender"
+		class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="C:\\spring\\logs\\output.log" />
+		<param name="Append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout" >
+			<param name="DatePattern" value="'.'yyyy-MM-dd" />
+			<param name="ConversionPattern"
+				value="[%d{HH:mm:ss}][%-5p](%F:%L)-%m%n" charset="UTF-8"/>
+		</layout>
+	</appender>
+
 	<logger name="jdbc.sqlonly" additivity="false">
 		<level value="info" />
 		<appender-ref ref="console" />
+		<appender-ref ref="dailyFileAppender" />
 	</logger>
 
 	<!-- Application Loggers -->
 	<logger name="com.shinhan.myapp">
 		<level value="info" />
+		<appender-ref ref="console" />
+		<appender-ref ref="dailyFileAppender" />
 	</logger>
 
 	<!-- 3rdparty Loggers -->

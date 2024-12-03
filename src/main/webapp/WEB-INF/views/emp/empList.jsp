@@ -19,6 +19,7 @@
 		<button id="btnDept" class="btn btn-danger">조회(only부서)</button>
 		<button id="btnJobJoin" class="btn btn-danger">조회(only직책join)</button>
 		<button id="btnJobJoin2" class="btn btn-danger">조회(only직책join-map)</button>
+		<button id="btnTransfer" class="btn btn-danger">Transaction연습</button>
 		<hr>		 
 			<div class="input-group mt-5 mb-5">
 				<span class="input-group-text">부서</span> 
@@ -83,7 +84,18 @@
    $("#btnDept").on("click", f_dept);
    $("#btnJobJoin").on("click", f_jobjoin);
    $("#btnJobJoin2").on("click", f_jobjoin2);
+   $("#btnTransfer").on("click", f_transfer);
 });  
+function f_transfer() {
+	alert("f_transfer");
+	$.ajax({
+		url:"${path}/emp/transfer.do",
+		success:function(responseData) {
+			alert("responseData");
+		},
+		error:function() {}
+	});
+}
 function f_salary() {
 	alert("f_salary");
 	$.ajax({

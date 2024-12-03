@@ -43,7 +43,7 @@ public class LoginCheckFilter implements Filter {
 		log.info("요청의 주소를 얻어보기:" + uri);
 		
 		//요청주소가 로그인이면 요청대로 수행하고 로그인이 아니면 로그인한건지 체크  
-		if(!uri.equals("/auth/login.do")) {
+		if(!uri.equals("/auth/login.do") && !uri.contains("/rest")) {
 			HttpSession session =  req.getSession();
 			MemberDTO member = (MemberDTO)session.getAttribute("loginMember");
 			if(member == null) {

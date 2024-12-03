@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.shinhan.myapp.emp.EmpDTO;
 import com.shinhan.myapp.emp.EmpService;
+import com.shinhan.myapp.model.AccountService;
 import com.shinhan.myapp.model.DeptService;
 
 import lombok.RequiredArgsConstructor;
@@ -40,6 +42,14 @@ public class EmpController {
 
 	final EmpService empService;
 	final DeptService deptService;
+	final AccountService accService;
+	
+	@ResponseBody	//응답 문서를 만들어서 데이터를 보낼때 사용(즉, page가 없음 == response.getWriter.append(""))
+	@GetMapping(value = "/transfer.do", produces = "text/plain;charset=utf-8")
+	public String transfer() {
+		accService.transferService();
+		return "이체 서비스 완료";
+	}
 
 	@GetMapping("/listByJobJoin.do")
 	public String listByJobJoin(String job, Model model) {
