@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ChatController {
 
-	@GetMapping("/chat")
+	@GetMapping("/chat.do")
 	public String chat() {
 		return "chat/chatting";
 	}
