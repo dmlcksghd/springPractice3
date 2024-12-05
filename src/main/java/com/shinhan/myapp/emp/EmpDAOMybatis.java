@@ -79,7 +79,7 @@ public class EmpDAOMybatis implements EmpDAOInterface {
 
 	public EmpDTO selectById(int empid) {
 		EmpDTO emp = sqlSession.selectOne(namespace + "selectById", empid);
-		log.info("mybatis이용: " + emp.toString());
+		log.info("mybatis이용: " + emp);
 		return emp;
 	}
 

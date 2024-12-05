@@ -2,7 +2,7 @@ package net.firstzone.board;
 
 import org.springframework.stereotype.Controller;
 
-@Controller
+@Controller("bb")
 public class BoardController {
 
 }

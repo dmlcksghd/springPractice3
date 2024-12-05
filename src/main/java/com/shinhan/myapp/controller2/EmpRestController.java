@@ -21,7 +21,9 @@ import com.shinhan.myapp.emp.EmpService;
 
 import oracle.jdbc.proxy.annotation.Post;
 
+//RestAPI 규칙을 따른다.
 //Spring3버젼 : @Controller + @ResponseBody
+//Spring4버젼 : @RestController => @Controller + @ResponseBody
 @Controller
 @ResponseBody
 @RequestMapping("/rest")

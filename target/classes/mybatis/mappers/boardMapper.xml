@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shinhan.board">
+	<select id="selectAll" resultType="boardVO">
+		select * 
+		from tbl_board
+		order by 1 desc
+	</select>
+	<select id="selectById" parameterType="long" resultType="boardVO">
+			select *
+			from tbl_board
+			where BOARD_NO = #{bno}
+	</select>
+	<insert id="insert" parameterType="boardVO">
+		insert into tbl_board(BOARD_NO, TITLE, CONTENT, WRITER, PIC)
+		values(seq_board.nextval, #{title}, #{content}, #{writer}, #{pic})
+	</insert>
+	<update id="update" parameterType="boardVO">
+		update tbl_board set
+		TITLE = #{title},
+		CONTENT = #{content},
+		WRITER = #{writer},
+		PIC = #{pic}
+		where BOARD_NO = #{board_no}
+	</update>
+	<delete id="delete" parameterType="long">
+		delete from tbl_board where BOARD_NO = #{board_no}
+	</delete>
+	
+</mapper>

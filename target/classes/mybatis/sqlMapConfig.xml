@@ -17,5 +17,6 @@
 		<typeAlias type="com.shinhan.myapp.vo.MemberDTO" alias="memberVO" />
 		<typeAlias type="com.shinhan.myapp.emp.JobDTO" alias="jobVO" />
 		<typeAlias type="com.shinhan.myapp.emp.EmpDTO" alias="empVO" />
+		<typeAlias type="com.shinhan.myapp.board.BoardDTO" alias="boardVO" />
 	</typeAliases>
 </configuration>

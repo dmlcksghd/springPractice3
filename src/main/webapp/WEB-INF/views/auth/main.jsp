@@ -16,6 +16,8 @@
     <li><a href="${path}/emp/insert.do">직원입력</a></li>
     <li><a href="${path}/dept/list.do">부서조회</a></li>
     <li><a href="${path}/emp/insert.do">부서입력</a></li>
+    <li><a href="${path}/board/insert.do">board입력</a></li>
+    <li><a href="${path}/board/list.do">board조회</a></li>
   </ul>
 </body>
 </html>
